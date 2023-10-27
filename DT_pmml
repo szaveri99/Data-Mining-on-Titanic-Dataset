@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PMML version="4.2" xmlns="http://www.dmg.org/PMML-4_2">
+  <Header copyright="LENOVO">
+    <Application name="KNIME" version="4.7.1"/>
+  </Header>
+  <DataDictionary numberOfFields="10">
+    <DataField name="Sex" optype="categorical" dataType="string">
+      <Value value="male"/>
+      <Value value="female"/>
+    </DataField>
+    <DataField name="Age" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="0.17" rightMargin="80.0"/>
+    </DataField>
+    <DataField name="SibSp" optype="continuous" dataType="integer">
+      <Interval closure="closedClosed" leftMargin="0.0" rightMargin="8.0"/>
+    </DataField>
+    <DataField name="Parch" optype="continuous" dataType="integer">
+      <Interval closure="closedClosed" leftMargin="0.0" rightMargin="9.0"/>
+    </DataField>
+    <DataField name="Salary" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="1.66" rightMargin="4962.37"/>
+    </DataField>
+    <DataField name="Survived" optype="categorical" dataType="string">
+      <Value value="Dead"/>
+      <Value value="Alive"/>
+    </DataField>
+    <DataField name="Fare" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="0.0" rightMargin="512.3292"/>
+    </DataField>
+    <DataField name="Embarked" optype="categorical" dataType="string">
+      <Value value="S"/>
+      <Value value="C"/>
+      <Value value="Q"/>
+    </DataField>
+    <DataField name="age_group" optype="categorical" dataType="string">
+      <Value value="15-24"/>
+      <Value value="25-54"/>
+      <Value value="0-14"/>
+      <Value value="55-64"/>
+    </DataField>
+    <DataField name="Fare_category" optype="categorical" dataType="string">
+      <Value value="0-20"/>
+      <Value value="21-66"/>
+    </DataField>
+  </DataDictionary>
+  <TreeModel modelName="DecisionTree" functionName="classification" splitCharacteristic="binarySplit" missingValueStrategy="lastPrediction" noTrueChildStrategy="returnNullPrediction">
+    <MiningSchema>
+      <MiningField name="Sex" invalidValueTreatment="asIs"/>
+      <MiningField name="Age" invalidValueTreatment="asIs"/>
+      <MiningField name="SibSp" invalidValueTreatment="asIs"/>
+      <MiningField name="Parch" invalidValueTreatment="asIs"/>
+      <MiningField name="Salary" invalidValueTreatment="asIs"/>
+      <MiningField name="Fare" invalidValueTreatment="asIs"/>
+      <MiningField name="Embarked" invalidValueTreatment="asIs"/>
+      <MiningField name="age_group" invalidValueTreatment="asIs"/>
+      <MiningField name="Fare_category" invalidValueTreatment="asIs"/>
+      <MiningField name="Survived" invalidValueTreatment="asIs" usageType="target"/>
+    </MiningSchema>
+    <Node id="0" score="Dead" recordCount="963.0">
+      <True/>
+      <ScoreDistribution value="Dead" recordCount="601.0"/>
+      <ScoreDistribution value="Alive" recordCount="362.0"/>
+      <Node id="1" score="Dead" recordCount="623.0">
+        <SimpleSetPredicate field="Sex" booleanOperator="isIn">
+          <Array n="1" type="string">"male" </Array>
+        </SimpleSetPredicate>
+        <ScoreDistribution value="Dead" recordCount="543.0"/>
+        <ScoreDistribution value="Alive" recordCount="80.0"/>
+        <Node id="2" score="Alive" recordCount="24.0">
+          <SimplePredicate field="Age" operator="lessOrEqual" value="4.5"/>
+          <ScoreDistribution value="Dead" recordCount="11.0"/>
+          <ScoreDistribution value="Alive" recordCount="13.0"/>
+          <Node id="3" score="Alive" recordCount="16.0">
+            <SimplePredicate field="SibSp" operator="lessOrEqual" value="2.5"/>
+            <ScoreDistribution value="Dead" recordCount="4.0"/>
+            <ScoreDistribution value="Alive" recordCount="12.0"/>
+          </Node>
+          <Node id="8" score="Dead" recordCount="8.0">
+            <SimplePredicate field="SibSp" operator="greaterThan" value="2.5"/>
+            <ScoreDistribution value="Dead" recordCount="7.0"/>
+            <ScoreDistribution value="Alive" recordCount="1.0"/>
+          </Node>
+        </Node>
+        <Node id="11" score="Dead" recordCount="599.0">
+          <SimplePredicate field="Age" operator="greaterThan" value="4.5"/>
+          <ScoreDistribution value="Dead" recordCount="532.0"/>
+          <ScoreDistribution value="Alive" recordCount="67.0"/>
+        </Node>
+      </Node>
+      <Node id="138" score="Alive" recordCount="340.0">
+        <SimpleSetPredicate field="Sex" booleanOperator="isIn">
+          <Array n="1" type="string">"female" </Array>
+        </SimpleSetPredicate>
+        <ScoreDistribution value="Dead" recordCount="58.0"/>
+        <ScoreDistribution value="Alive" recordCount="282.0"/>
+        <Node id="139" score="Alive" recordCount="150.0">
+          <SimplePredicate field="Salary" operator="lessOrEqual" value="366.52"/>
+          <ScoreDistribution value="Dead" recordCount="51.0"/>
+          <ScoreDistribution value="Alive" recordCount="99.0"/>
+          <Node id="140" score="Alive" recordCount="132.0">
+            <SimplePredicate field="Fare" operator="lessOrEqual" value="24.808349999999997"/>
+            <ScoreDistribution value="Dead" recordCount="37.0"/>
+            <ScoreDistribution value="Alive" recordCount="95.0"/>
+          </Node>
+          <Node id="193" score="Dead" recordCount="18.0">
+            <SimplePredicate field="Fare" operator="greaterThan" value="24.808349999999997"/>
+            <ScoreDistribution value="Dead" recordCount="14.0"/>
+            <ScoreDistribution value="Alive" recordCount="4.0"/>
+          </Node>
+        </Node>
+        <Node id="198" score="Alive" recordCount="190.0">
+          <SimplePredicate field="Salary" operator="greaterThan" value="366.52"/>
+          <ScoreDistribution value="Dead" recordCount="7.0"/>
+          <ScoreDistribution value="Alive" recordCount="183.0"/>
+        </Node>
+      </Node>
+    </Node>
+  </TreeModel>
+</PMML>
